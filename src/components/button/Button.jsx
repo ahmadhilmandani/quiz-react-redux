@@ -9,6 +9,6 @@ export default function Button({ children, onClickProp }) {
 }
 
 Button.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.array,
   onClickProp: PropTypes.func,
 }
