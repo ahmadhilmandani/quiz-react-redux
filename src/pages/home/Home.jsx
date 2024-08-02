@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/button/Button"
+import FillButton from "../../components/button/FillButton"
+import { IconArrowNarrowRight } from "@tabler/icons-react";
 export default function Home() {
   const navigate = useNavigate();
   return (
@@ -8,11 +9,11 @@ export default function Home() {
         Are You Ready?
       </h1>
       <div className="flex gap-4">
-        <Button onClickProp={() => {
+        <FillButton onClickProp={() => {
           navigate('/quiz')
         }}>
-          {`Let's`} Get it! 🔥
-        </Button>
+          {`Let's`} Get it!  <IconArrowNarrowRight />
+        </FillButton>
       </div>
     </main>
   )

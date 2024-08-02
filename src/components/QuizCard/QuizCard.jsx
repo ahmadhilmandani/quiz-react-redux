@@ -1,10 +1,12 @@
-import Button from "../button/Button";
+import FillButton from "../button/FillButton";
+import OutlineButton from "../button/OutlineButton";
 import AnswerOpt from "../AnswerOpt/AnswerOpt";
 
 import { setAnswer } from "../../features/QnASlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 
 function decodeHtmlEntities(text) {
   const textArea = document.createElement('textarea');
@@ -37,19 +39,20 @@ export default function QuizCard() {
           })
         }
         <div className="flex gap-5 absolute bottom-5 left-5 right-5">
-          <Button onClickProp={() => {
+          <OutlineButton onClickProp={() => {
             if (questionIndex != 0) {
               setQuestionIndex(() => { return questionIndex - 1 })
             }
           }}>
-            Prev ⬅️
-          </Button>
-          <Button onClickProp={() => {
+            <IconArrowNarrowLeft className="text-cyan-500" />
+            Prev
+          </OutlineButton>
+          <FillButton onClickProp={() => {
             if (questionIndex != QnA.length - 1)
               setQuestionIndex(() => { return questionIndex + 1 })
           }}>
-            Next ➡️
-          </Button>
+            Next <IconArrowNarrowRight />
+          </FillButton>
         </div>
       </div>
     </>
