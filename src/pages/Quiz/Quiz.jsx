@@ -15,7 +15,7 @@ export default function Quiz() {
 
   return (
     <div className="w-full min-h-screen flex flex-col justify-center items-center pt-24 pb-10">
-      <div className={`${loadingFetchQue ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-white/55 backdrop-blur-sm justify-center items-center z-[100]`}>
+      <div className={`${loadingFetchQue ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-neutral-600/55 backdrop-blur-sm justify-center items-center z-[100]`}>
         <FadeLoader loading={true} color="#06b6d4" size={150} />
       </div>
       <QuizCard />
