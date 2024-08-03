@@ -5,6 +5,7 @@ import AnswerOpt from "../AnswerOpt/AnswerOpt";
 import { setAnswer } from "../../features/QnASlice";
 
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 
@@ -15,6 +16,7 @@ function decodeHtmlEntities(text) {
 }
 
 export default function QuizCard() {
+  const navigate= useNavigate()
   const [questionIndex, setQuestionIndex] = useState(0)
   const QnA = useSelector((state) => { return state.qNA.question })
   const dispatch = useDispatch()
@@ -48,8 +50,11 @@ export default function QuizCard() {
             Prev
           </OutlineButton>
           <FillButton onClickProp={() => {
-            if (questionIndex != QnA.length - 1)
+            if (questionIndex != QnA.length - 1) {
               setQuestionIndex(() => { return questionIndex + 1 })
+            } else {
+              navigate('/quiz/result')
+            }
           }}>
             Next <IconArrowNarrowRight />
           </FillButton>

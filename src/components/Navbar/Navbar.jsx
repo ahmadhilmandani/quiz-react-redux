@@ -6,7 +6,7 @@ export default function Navbar() {
       </h1>
 
       <div className="text-gray-400 text-[14px]">
-        10:00
+        {/* 10:00 */}
       </div>
     </nav>
   )
