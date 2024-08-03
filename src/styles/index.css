@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :not(h1, h2, h3, h4, h5, h6) {
+    font-family: "Inter", sans-serif;
+    @apply text-[16px] sm:max-xl:text-[24px];
+  }
+
+  h1 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    @apply text-[32px] xl:text-[24px] sm:max-xl:text-[72px] font-bold;
+  }
+  
+  h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    @apply text-[24px] xl:text-[20px] sm:max-xl:text-[60px] font-bold;
+  }
+  
+  h3 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    @apply text-[20px] xl:text-[16px] sm:max-xl:text-[48px] font-bold;
+  }
+
+  .custom-heading-1 {
+    @apply xl:text-[56px] text-[40px] sm:max-xl:text-[80px] font-bold;
+  }
+}
