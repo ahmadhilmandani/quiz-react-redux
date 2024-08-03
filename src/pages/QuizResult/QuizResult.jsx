@@ -27,7 +27,7 @@ export default function QUizResult() {
 
 
   return (
-    <div className="pt-32 pb-16">
+    <div className="pt-32 pb-16 px-4">
       <h1 className="text-center text-cyan-500 text-4xl font-bold mb-3">
         Congratulation!
       </h1>
