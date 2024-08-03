@@ -38,16 +38,17 @@ export default function QUizResult() {
         your correct answer: {finalResult} / {QnA.length}
       </small>
       <div className="text-center mb-2 text-xl font-semibold">
-        {'"Wonder rather than doubt is the root of all knowledge."'}
+        {'"Success does not belong to smart people. Success belongs to those who keep trying"'}
       </div>
       <small className="text-center block mb-8">
-        - Abraham Joshua Heschel -
+        - BJ Habibie -
       </small>
       <div className="mx-auto w-fit mb-3">
         <FillButton onClickProp={() => {
           window.location.href = "/";
         }}>
-          Go Back To Home  <IconArrowNarrowLeft />
+          <IconArrowNarrowLeft />
+          Go Back To Home
         </FillButton>
       </div>
       <small className="text-center text-neutral-500 block mb-3">
@@ -87,9 +88,10 @@ export default function QUizResult() {
       })}
       <div className="mx-auto w-fit mt-8">
         <FillButton onClickProp={() => {
-          window.location.href = "/";
+          window.location.href = "/"
         }}>
-          Go Back To Home  <IconArrowNarrowLeft />
+          <IconArrowNarrowLeft />
+          Go Back To Home
         </FillButton>
       </div>
     </div>
