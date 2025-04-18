@@ -60,7 +60,7 @@ export default function QUizResult() {
       {QnA.map((valueOfQnA, index) => {
         return (
           <>
-            <div className="max-w-[640px] w-full mx-auto bg-white px-8 py-6 border-b">
+            <div key={`${index} - ${valueOfQnA?.question}`} className="max-w-[640px] w-full mx-auto bg-white px-8 py-6 border-b">
               <p className="mb-8">
                 {index + 1}. {decodeHtmlEntities(valueOfQnA?.question)}
               </p>
@@ -68,7 +68,7 @@ export default function QUizResult() {
                 valueOfQnA?.answerOpt.map((answerOptValue, answerOptIndex) => {
                   return (
                     <>
-                      <div className={`${answerOptIndex == valueOfQnA?.answerOpt.length ? 'mb-20' : 'mb-5'} flex gap-5 items-center cursor-pointer`}>
+                      <div key={`${answerOptIndex} - ${answerOptValue}`} className={`${answerOptIndex == valueOfQnA?.answerOpt.length ? 'mb-20' : 'mb-5'} flex gap-5 items-center cursor-pointer`}>
                         <div className={`${answer[index] == answerOptValue ? 'bg-cyan-500 text-white font-bold' : 'border border-neutral-300'} 'flex justify-center items-center px-4 py-2 transition-all`} >
                           {answerOptIndex == 0 ? 'A' : answerOptIndex == 1 ? 'B' : answerOptIndex == 2 ? 'C' : 'D'}
                         </div>

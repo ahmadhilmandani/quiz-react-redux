@@ -48,7 +48,6 @@ export const fetchQuestion = amount => dispatch => {
       console.log(err)
     }).finally(() => {
       dispatch(setLoading(false))
-
     })
 }
 

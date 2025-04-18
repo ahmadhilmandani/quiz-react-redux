@@ -1,14 +1,16 @@
 import QuizCard from "../../components/QuizCard/QuizCard";
 
 import FadeLoader from "react-spinners/FadeLoader";
-import { fetchQuestion } from "../../features/QnASlice"
+import { fetchQuestion } from "../../redux/QnASlice"
 
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 
+
 export default function Quiz() {
   const loadingFetchQue = useSelector((state) => { return state.qNA.isLoading })
   const dispatch = useDispatch()
+  
   useEffect(() => {
     dispatch(fetchQuestion())
   }, [])

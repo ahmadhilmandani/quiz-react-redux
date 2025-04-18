@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import QnASlice from "../features/QnASlice";
+import QnASlice from "../redux/QnASlice";
 
 export const store = configureStore({
   reducer: {
-    qNA: QnASlice.reducer,
+    qNA : QnASlice.reducer
   }
 })

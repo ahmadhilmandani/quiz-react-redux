@@ -3,7 +3,7 @@ import OutlineButton from "../button/OutlineButton";
 import Modal from "../Modal/Modal";
 import AnswerOpt from "../AnswerOpt/AnswerOpt";
 
-import { setAnswer } from "../../features/QnASlice";
+import { setAnswer } from "../../redux/QnASlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ export default function QuizCard() {
   const [questionIndex, setQuestionIndex] = useState(0)
   const QnA = useSelector((state) => { return state.qNA.question })
   const dispatch = useDispatch()
-
   const [modalData, setModalData] = useState({
     isOpen: false,
     header: '',
@@ -36,12 +35,13 @@ export default function QuizCard() {
 
   return (
     <>
-      {modalData.isOpen &&
+      {
+        modalData.isOpen &&
         <Modal modalHeader={modalData.header} yesClickEvent={modalData.yesClickEvent} noClickEvent={modalData.noClickEvent}>
           {modalData.body}
         </Modal>
       }
-      <div className="py-8 px-10 bg-slate-50 shadow-lg max-w-[640px] w-full relative">
+      <div key={1} className="py-8 px-10 bg-slate-50 shadow-lg max-w-[640px] w-full relative">
         <div className="mb-2 flex items-center justify-between">
           <small className="block text-cyan-300 border-l-4 border-cyan-200 pl-2 text-sm">Question {questionIndex + 1}</small>
           <small className="block text-neutral-400 text-sm">{questionIndex + 1} / {QnA.length}</small>
@@ -52,9 +52,7 @@ export default function QuizCard() {
         {
           QnA[questionIndex]?.answerOpt.map((answerOptValue, answerOptIndex) => {
             return (
-              <>
-                <AnswerOpt clickSetAnswer={() => { dispatch(setAnswer({ index: questionIndex, answer: answerOptValue })) }} questionIndex={questionIndex} answerOptValue={answerOptValue} answerOptIndex={answerOptIndex} isLastIndex={answerOptIndex == QnA[questionIndex]?.answerOpt.length - 1 ? true : false} />
-              </>
+              <AnswerOpt key={`${answerOptIndex} - ${answerOptValue}`} clickSetAnswer={() => { dispatch(setAnswer({ index: questionIndex, answer: answerOptValue })) }} questionIndex={questionIndex} answerOptValue={answerOptValue} answerOptIndex={answerOptIndex} isLastIndex={answerOptIndex == QnA[questionIndex]?.answerOpt.length - 1 ? true : false} />
             )
           })
         }
