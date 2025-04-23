@@ -9,15 +9,21 @@ function decodeHtmlEntities(text) {
 }
 
 export default function AnswerOpt({ answerOptValue, answerOptIndex, isLastIndex, questionIndex, clickSetAnswer }) {
-  const userAnswer = useSelector((state)=>{return state.qNA.answer})
+  const userAnswer = useSelector((state) => { return state.qNA.answer })
   return (
     <>
-      <div onClick={clickSetAnswer} className={`${isLastIndex == true ? 'mb-20' : 'mb-5'} flex gap-5 items-center cursor-pointer group group-hover:cursor-pointer`}>
-        {/* <input type="radio" name={`no-0`} id={`no-0-${answerOptIndex}`} value={answerOptValue} className="hidden" /> */}
-        <div className={`${userAnswer[questionIndex] == answerOptValue ? 'bg-cyan-500 text-white font-bold' : 'border border-neutral-300 group-hover:bg-neutral-300'} 'flex justify-center items-center px-4 py-2 transition-all`} >
-          {answerOptIndex == 0 ? 'A' : answerOptIndex == 1 ? 'B' : answerOptIndex == 2 ? 'C' : 'D'}
+      <div onClick={clickSetAnswer} className={`flex gap-5 justify-center items-center cursor-pointer group group-hover:cursor-pointer bg-slate-300/50 hover:bg-slate-200 relative transition-all`}>
+        <div className='absolute top-6 left-6 text-4xl font-medium text-slate-400/55 group-hover:text-cyan-400 transition-all'>
+          {
+            answerOptIndex == 0 ? 'A' :
+              answerOptIndex == 1 ? 'B' :
+                answerOptIndex == 2 ? 'C' :
+                  answerOptIndex == 3 ? 'D' : ''
+          }
         </div>
-        <label htmlFor={`no-0-${answerOptIndex}`} className="group-hover:font-bold group-hover:cursor-pointer">{decodeHtmlEntities(answerOptValue)}</label>
+        <label htmlFor={`no-0-${answerOptIndex}`} className="group-hover:font-bold group-hover:cursor-pointer group-hover:scale-150 transition-all text-neutral-800 font-medium text-xl">
+          {decodeHtmlEntities(answerOptValue)}
+        </label>
       </div>
     </>
   )
