@@ -4,6 +4,7 @@ import { setAnswer } from '../../redux/QnASlice';
 import { toast } from 'react-toastify';
 import { useQuestionQuery } from '../../hooks/useQuestionQuery';
 import ToastWithButton from '../Toast/Toast';
+import { setScore } from '../../redux/ScoreSlice';
 
 function decodeHtmlEntities(text) {
   const textArea = document.createElement('textarea');
@@ -14,6 +15,8 @@ function decodeHtmlEntities(text) {
 export default function AnswerOpt({ answerOptValue, answerOptIndex, questionIndex }) {
   const { data: listQnA } = useQuestionQuery()
   const answer = useSelector((state) => { return state.qNA.answer })
+  const score = useSelector((state) => { return state.score.value })
+
   const dispatch = useDispatch()
 
   function handleClickOpt() {
@@ -29,6 +32,7 @@ export default function AnswerOpt({ answerOptValue, answerOptIndex, questionInde
         className: 'p-4 min-w-[320px] max-w-[640px] w-screen border border-emerald-600/40',
         ariaLabel: 'Answer correct',
       })
+      dispatch(setScore({ score: score + 10 }))
     } else {
       toast(<ToastWithButton correctAnswer={listQnA[questionIndex].correct_answer} />, {
         closeButton: false,
@@ -37,7 +41,6 @@ export default function AnswerOpt({ answerOptValue, answerOptIndex, questionInde
       })
     }
   }
-
 
   return (
     <>

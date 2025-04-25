@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const QnASlice = createSlice({
   name: 'QnA',
