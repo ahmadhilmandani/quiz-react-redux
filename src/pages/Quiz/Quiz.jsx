@@ -14,7 +14,6 @@ export default function Quiz() {
         <FadeLoader loading={true} color="#06b6d4" size={150} />
       </div>
       <QuizCard />
-      
     </div>
   )
 }
