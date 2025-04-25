@@ -1,7 +1,16 @@
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
+import { setCurrentQuestionIndex } from "../../redux/QnASlice"
+import { PropTypes } from 'prop-types'
 
-// eslint-disable-next-line react/prop-types
-export default function SplitButtons({ isCorrect = false }) {
+export default function ToastWithButton({ isCorrect = false, correctAnswer }) {
+  const dispatch = useDispatch()
+  const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
+
+  function handleNextQuestion() {
+    dispatch(setCurrentQuestionIndex({ 'questionIndex': currentQuestionIndex + 1 }))
+    toast.dismiss()
+  }
 
   if (isCorrect) {
     return (
@@ -10,10 +19,14 @@ export default function SplitButtons({ isCorrect = false }) {
           Correct ✅
         </strong>
         <div className="text-neutral-600 mb-4">
-          <strong className="text-neutral-600">{"Hilman"}</strong> is a <strong className="text-neutral-600">correct</strong> answer.
+          <strong className="text-neutral-600">{correctAnswer}</strong> is a <strong className="text-neutral-600">correct</strong> answer.
         </div>
         <div>
-          <button className="py-2 px-6 rounded-md bg-emerald-500 w-full text-white font-medium">Next Question</button>
+          <button
+            onClick={() => {
+              handleNextQuestion()
+            }}
+            className="py-2 px-6 rounded-md bg-emerald-500 w-full text-white font-medium">Next Question</button>
         </div>
       </div>
     )
@@ -25,12 +38,20 @@ export default function SplitButtons({ isCorrect = false }) {
           Incorrect ❌
         </strong>
         <div className="text-neutral-600 mb-4">
-          <strong className="text-neutral-600">{"Hilman"}</strong> is a <strong className="text-neutral-600">correct</strong> answer.
+          <strong className="text-neutral-600">{correctAnswer}</strong> is a <strong className="text-neutral-600">correct</strong> answer.
         </div>
         <div>
-          <button onClick={() => { toast.dismiss() }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">Next Question</button>
+          <button
+            onClick={() => {
+              handleNextQuestion()
+            }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">Next Question</button>
         </div>
       </div>
     )
   }
+}
+
+ToastWithButton.propTypes = {
+  isCorrect: PropTypes.bool,
+  correctAnswer: PropTypes.string
 }

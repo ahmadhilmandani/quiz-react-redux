@@ -5,13 +5,16 @@ import axios from "axios";
 const QnASlice = createSlice({
   name: 'QnA',
   initialState: {
+    currentQuestionIndex: 0,
     isLoading: false,
     answer: [],
   },
   reducers: {
+    setCurrentQuestionIndex: (state, action) => {
+      state.currentQuestionIndex = action.payload.questionIndex
+    },
     setAnswer: (state, action) => {
       state.answer[action.payload.index] = action.payload.answer
-      console.log(state.answer)
     },
     setLoading: (state, action) => {
       state.isLoading = action.payload
@@ -20,6 +23,6 @@ const QnASlice = createSlice({
 })
 
 
-export const { setAnswer, setLoading } = QnASlice.actions
+export const { setAnswer, setLoading, setCurrentQuestionIndex } = QnASlice.actions
 
 export default QnASlice
