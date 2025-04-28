@@ -1,8 +1,33 @@
-# React + Vite
+# Quiz React Redux
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Quiz React Redux** — a simple yet educational quiz app about animals.  
+This project is a website built to solve the [Roadmap.sh Quiz App Challenge](https://roadmap.sh/projects/quiz-app).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+
+- Fun and educational quizzes about animals
+- You have 10 seconds maximum to answer every question
+- if you answer it right, you could get 10 + points
+- if your answer is not right, then it's fine no penalty
+
+---
+
+## 🛠️ Technologies Used
+
+- [React](https://react.dev/)
+- [Redux](https://redux.js.org/)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to run the project locally:
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/ahmadhilmandani/quiz-react-redux.git
