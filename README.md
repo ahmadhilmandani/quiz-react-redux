@@ -31,3 +31,16 @@ Follow these steps to run the project locally:
 
 ```bash
 git clone https://github.com/ahmadhilmandani/quiz-react-redux.git
+
+
+2. **Install dependencies**
+
+```bash
+npm install
+
+3. **Run it!**
+
+```bash
+npm run dev
+
+
