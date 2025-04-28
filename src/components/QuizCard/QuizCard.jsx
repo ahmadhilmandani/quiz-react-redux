@@ -1,106 +1,47 @@
-import FillButton from "../button/FillButton";
-import OutlineButton from "../button/OutlineButton";
-import Modal from "../Modal/Modal";
+import PropTypes from "prop-types";
 import AnswerOpt from "../AnswerOpt/AnswerOpt";
 
-import { setAnswer } from "../../features/QnASlice";
-
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
-
+import { useSelector } from "react-redux";
 function decodeHtmlEntities(text) {
   const textArea = document.createElement('textarea');
   textArea.innerHTML = text;
   return textArea.value;
 }
 
-export default function QuizCard() {
-  const navigate = useNavigate()
-  const [questionIndex, setQuestionIndex] = useState(0)
-  const QnA = useSelector((state) => { return state.qNA.question })
-  const dispatch = useDispatch()
-
-  const [modalData, setModalData] = useState({
-    isOpen: false,
-    header: '',
-    body: '',
-    yesClickEvent: () => {
-
-    },
-    noClickEvent: () => {
-
-    }
-  })
+export default function QuizCard({ listQnA }) {
+  const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
+  const score = useSelector((state) => { return state.score.value })
 
   return (
     <>
-      {modalData.isOpen &&
-        <Modal modalHeader={modalData.header} yesClickEvent={modalData.yesClickEvent} noClickEvent={modalData.noClickEvent}>
-          {modalData.body}
-        </Modal>
-      }
-      <div className="py-8 px-10 bg-slate-50 shadow-lg max-w-[640px] w-full relative">
-        <div className="mb-2 flex items-center justify-between">
-          <small className="block text-cyan-300 border-l-4 border-cyan-200 pl-2 text-sm">Question {questionIndex + 1}</small>
-          <small className="block text-neutral-400 text-sm">{questionIndex + 1} / {QnA.length}</small>
+      <div className="py-8 px-10 relative mb-16">
+        <div className="mb-6 flex items-center justify-between">
+          <small className="block text-cyan-400 border-l-4 border-cyan-300 pl-2 text-2xl font-bold">
+            Question {currentQuestionIndex + 1}
+            <small className="text-neutral-400/50 text-2xl"> / {listQnA.length}</small>
+          </small>
+          <small className="block text-neutral-700 text-xl px-6 py-2 bg-cyan-200 rounded-full font-semibold">Score : {score}</small>
         </div>
-        <p className="mb-8">
-          {decodeHtmlEntities(QnA[questionIndex]?.question)}
+        <p className="mb-8 text-4xl text-neutral-700 leading-[165%]">
+          {decodeHtmlEntities(listQnA[currentQuestionIndex]?.question)}
         </p>
-        {
-          QnA[questionIndex]?.answerOpt.map((answerOptValue, answerOptIndex) => {
-            return (
-              <>
-                <AnswerOpt clickSetAnswer={() => { dispatch(setAnswer({ index: questionIndex, answer: answerOptValue })) }} questionIndex={questionIndex} answerOptValue={answerOptValue} answerOptIndex={answerOptIndex} isLastIndex={answerOptIndex == QnA[questionIndex]?.answerOpt.length - 1 ? true : false} />
-              </>
-            )
-          })
-        }
-        <div className="flex gap-5 absolute bottom-5 left-5 right-5">
-          <OutlineButton onClickProp={() => {
-            if (questionIndex != 0) {
-              setQuestionIndex(() => { return questionIndex - 1 })
-            } else {
-              setModalData({
-                isOpen: true,
-                header: 'Are you Sure You Want to Go Back to Homepage?',
-                body: "If you go back to homepage, all the question you answered will gone. is this fine to you, please click 'yes'",
-                yesClickEvent: () => {
-                  window.location.href = "/";
-                },
-                noClickEvent: () => {
-                  setModalData({ ...modalData, isOpen: false })
-                }
-              })
-            }
-          }}>
-            <IconArrowNarrowLeft className="text-cyan-500" />
-            {questionIndex == 0 ? 'Back To Home' : 'Prev'}
-          </OutlineButton>
-          <FillButton onClickProp={() => {
-            if (questionIndex != QnA.length - 1) {
-              setQuestionIndex(() => { return questionIndex + 1 })
-            } else {
-              setModalData({
-                isOpen: true,
-                header: 'Are you Sure to Finish?',
-                body: "Only finish the quiz when you 100% believe of your answer",
-                yesClickEvent: () => {
-                  navigate('/quiz/result')
-                },
-                noClickEvent: () => {
-                  setModalData({ ...modalData, isOpen: false })
-                }
-              })
-            }
-          }}>
-            {questionIndex == QnA.length - 1 ? 'Finish Quiz' : 'Next'}
-            <IconArrowNarrowRight />
-          </FillButton>
+        <div className="mb-3 text-neutral-500">
+          Your answer is:
+        </div>
+        <div className="grid grid-cols-[repeat(auto-fit,_minmax(240px,_1fr))] gap-4 auto-rows-[120px] mb-16">
+          {
+            listQnA[currentQuestionIndex]?.answerOpt.map((answerOptValue, answerOptIndex) => {
+              return (
+                <AnswerOpt key={`${answerOptIndex} - ${answerOptValue}`} answerOptValue={answerOptValue} answerOptIndex={answerOptIndex} questionIndex={currentQuestionIndex} />
+              )
+            })
+          }
         </div>
       </div>
     </>
   )
+}
+
+QuizCard.propTypes = {
+  listQnA: PropTypes.obj
 }
