@@ -1,7 +1,7 @@
+import PropTypes from "prop-types";
 import AnswerOpt from "../AnswerOpt/AnswerOpt";
 
 import { useSelector } from "react-redux";
-import { useQuestionQuery } from "../../hooks/useQuestionQuery";
 
 function decodeHtmlEntities(text) {
   const textArea = document.createElement('textarea');
@@ -9,18 +9,10 @@ function decodeHtmlEntities(text) {
   return textArea.value;
 }
 
-export default function QuizCard() {
+export default function QuizCard({ listQnA }) {
   const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
   const score = useSelector((state) => { return state.score.value })
-  const { data: listQnA, isLoading } = useQuestionQuery()
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center w-full h-screen">
-        Loading
-      </div>
-    )
-  }
 
   return (
     <>
@@ -50,4 +42,8 @@ export default function QuizCard() {
       </div>
     </>
   )
+}
+
+QuizCard.propTypes = {
+  listQnA: PropTypes.obj
 }

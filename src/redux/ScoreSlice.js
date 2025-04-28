@@ -4,8 +4,8 @@ const ScoreSlice = createSlice({
   name: 'Score',
   initialState: { value: 0 },
   reducers: {
-    setScore: (state, action) => {
-      state.value = action.payload.score
+    setScore: (state) => {
+      state.value = state.value + 10
     }
   }
 })

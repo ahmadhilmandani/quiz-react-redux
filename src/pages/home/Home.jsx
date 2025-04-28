@@ -4,10 +4,17 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 import heroImgBook from "../../assets/hero-img-book.png"
 import blurBlueLight from "../../assets/blur-blue-light.png"
 import '../../styles/hero-animation.css'
-
+import { useDispatch } from "react-redux";
+import { setTimerActive } from '../../redux/TimerSlice.js'
 
 export default function Home() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  function handleStartQuiz() {
+    navigate('/quiz')
+    dispatch(setTimerActive({ 'isActive': true }))
+  }
   return (
     <main className="w-full min-h-screen xl:flex justify-between items-center pt-32 pb-10 px-4 xl:px-16 bg-slate-100 relative">
       <div className="w-full max-w-[640px] mx-auto xl:mx-0 bg-red-">
@@ -19,9 +26,7 @@ export default function Home() {
           Enhance your learning experience by taking fun and informative quizzes. {`Let's`} get started!
         </p>
         <div className="flex gap-4 max-w-[240px] w-full mx-auto xl:mx-0 text-2xl">
-          <FillButton onClickProp={() => {
-            navigate('/quiz')
-          }}>
+          <FillButton onClickProp={handleStartQuiz}>
             {`Let's`} Get it!  <IconArrowNarrowRight />
           </FillButton>
         </div>
