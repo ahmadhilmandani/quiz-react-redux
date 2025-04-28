@@ -2,11 +2,12 @@ import QuizCard from "../../components/QuizCard/QuizCard";
 
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
-import { setTimer } from "../../redux/TimerSlice";
+import { setTimer, setTimerActive } from "../../redux/TimerSlice";
 import { useQuestionQuery } from "../../hooks/useQuestionQuery";
 import { toast } from "react-toastify";
 import ToastWithButton from "../../components/Toast/Toast";
 import { setScore } from "../../redux/ScoreSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function Quiz() {
@@ -16,6 +17,23 @@ export default function Quiz() {
   const { data: listQnA, isLoading } = useQuestionQuery()
   const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
   const [isAnswered, setIsAnswered] = useState(false)
+  const navigate = useNavigate()
+  let location = useLocation()
+
+  useEffect(() => {
+    if (currentQuestionIndex == 10) {
+      return navigate('/quiz/result')
+    }
+    setIsAnswered(false)
+  }, [currentQuestionIndex, navigate])
+
+  useEffect(() => {
+    dispatch(setTimerActive({ 'isActive': true }))
+
+    return () => {
+      dispatch(setTimerActive({ 'isActive': false }))
+    }
+  }, [location, dispatch])
 
   useEffect(() => {
     if (isLoading) {
@@ -63,9 +81,6 @@ export default function Quiz() {
 
   }, [answer, currentQuestionIndex, listQnA, timer, isLoading, dispatch, isAnswered])
 
-  useEffect(() => {
-    setIsAnswered(false)
-  }, [currentQuestionIndex])
 
   useEffect(() => {
     if (answer.length - 1 == currentQuestionIndex) {

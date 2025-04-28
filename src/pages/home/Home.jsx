@@ -4,16 +4,12 @@ import { IconArrowNarrowRight } from "@tabler/icons-react";
 import heroImgBook from "../../assets/hero-img-book.png"
 import blurBlueLight from "../../assets/blur-blue-light.png"
 import '../../styles/hero-animation.css'
-import { useDispatch } from "react-redux";
-import { setTimerActive } from '../../redux/TimerSlice.js'
 
 export default function Home() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
 
   function handleStartQuiz() {
     navigate('/quiz')
-    dispatch(setTimerActive({ 'isActive': true }))
   }
   return (
     <main className="w-full min-h-screen xl:flex justify-between items-center pt-32 pb-10 px-4 xl:px-16 bg-slate-100 relative">

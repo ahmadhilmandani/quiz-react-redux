@@ -6,12 +6,14 @@ import { setTimer } from "../../redux/TimerSlice"
 
 export default function ToastWithButton({ isTimeout = false, isCorrect = false, correctAnswer }) {
   const dispatch = useDispatch()
+  // const navigate = useNavigate()
   const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
 
   function handleNextQuestion() {
     dispatch(setCurrentQuestionIndex({ 'questionIndex': currentQuestionIndex + 1 }))
     toast.dismiss()
-    dispatch(setTimer({'timer': 10}))
+    dispatch(setTimer({ 'timer': 10 }))
+
   }
 
   if (isTimeout) {
@@ -27,7 +29,9 @@ export default function ToastWithButton({ isTimeout = false, isCorrect = false, 
           <button
             onClick={() => {
               handleNextQuestion()
-            }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">Next Question</button>
+            }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">
+            {currentQuestionIndex == 9 ? 'See Result' : 'Next Question'}
+          </button>
         </div>
       </div>
     )
@@ -47,7 +51,9 @@ export default function ToastWithButton({ isTimeout = false, isCorrect = false, 
             onClick={() => {
               handleNextQuestion()
             }}
-            className="py-2 px-6 rounded-md bg-emerald-500 w-full text-white font-medium">Next Question</button>
+            className="py-2 px-6 rounded-md bg-emerald-500 w-full text-white font-medium">
+            {currentQuestionIndex == 9 ? 'See Result' : 'Next Question'}
+          </button>
         </div>
       </div>
     )
@@ -65,7 +71,9 @@ export default function ToastWithButton({ isTimeout = false, isCorrect = false, 
           <button
             onClick={() => {
               handleNextQuestion()
-            }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">Next Question</button>
+            }} className="py-2 px-6 rounded-md bg-rose-500 w-full text-white font-medium">
+            {currentQuestionIndex == 9 ? 'See Result' : 'Next Question'}
+          </button>
         </div>
       </div>
     )

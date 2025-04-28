@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import AnswerOpt from "../AnswerOpt/AnswerOpt";
 
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function decodeHtmlEntities(text) {
   const textArea = document.createElement('textarea');
@@ -12,7 +13,6 @@ function decodeHtmlEntities(text) {
 export default function QuizCard({ listQnA }) {
   const currentQuestionIndex = useSelector((state) => { return state.qNA.currentQuestionIndex })
   const score = useSelector((state) => { return state.score.value })
-
 
   return (
     <>
